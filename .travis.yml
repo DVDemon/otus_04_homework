@@ -31,4 +31,4 @@ deploy:
   skip_cleanup: true
   script:
 
-  - curl -T 04_homework-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -udvdemon:$BINTRAY_API_KEY "https://api.bintray.com/content/ddzuba/otus-cpp/04_homework/$TRAVIS_BUILD_NUMBER/03_homework-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  - curl -T 04_homework-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -udvdemon:$BINTRAY_API_KEY "https://api.bintray.com/content/ddzuba/otus-cpp/04_homework/$TRAVIS_BUILD_NUMBER/04_homework-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
