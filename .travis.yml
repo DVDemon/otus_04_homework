@@ -1,4 +1,14 @@
 language: cpp
+
+branches:
+  only:
+    - master
+
+addons:
+  apt:
+    packages:
+      - doxygen
+
 before_script:
 - sudo apt-get install libgtest-dev
 - sudo apt-get install cmake # install cmake
@@ -26,9 +36,17 @@ script:
 - cmake --build .
 - cmake --build . --target test
 - cmake --build . --target package
+- doxygen Doxyfile
 deploy:
   provider: script
   skip_cleanup: true
   script:
-
   - curl -T 04_homework-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -udvdemon:$BINTRAY_API_KEY "https://api.bintray.com/content/ddzuba/otus-cpp/04_homework/$TRAVIS_BUILD_NUMBER/04_homework-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+
+  deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: docs/html
+  github_token: $GH_REPO_TOKEN
+  on:
+    branch: master
