@@ -76,7 +76,7 @@ namespace homework {
        } else {
             std::cout << std::endl;
        }
-   };
+   }
 
   
 /**
