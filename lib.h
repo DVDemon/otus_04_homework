@@ -41,6 +41,9 @@
 #include <string>
 #include <type_traits>
 #include <tuple>
+#include <vector>
+#include <list>
+
 /**
  * В данном пространстве имен располагаются функции и шаблоны, необходимые для вывода "виртуального адреса" на экран. 
  */

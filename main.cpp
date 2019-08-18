@@ -1,7 +1,6 @@
 #include "lib.h"
-#include <vector>
-#include <list>
-#include <tuple>
+
+
 
 
 int main(int argc, char* argv[]){
