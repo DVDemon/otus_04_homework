@@ -61,7 +61,7 @@ namespace homework {
 /**
  * Шаблон функции для печати любого интегрального типа. Функция определяет размер типа и выводит его побайтово через разделитель '.'.
  */
-    template <class T> typename std::enable_if<std::is_integral<T>::value,void>::type print_ip(T value){
+    template <class T> typename std::enable_if<std::is_integral<T>::value,void>::type print_ip(T&& value){
         size_t size = sizeof(value);
             for(int i=size-1;i>=0;i--){
                 print_char(char(value>>(8*i)));
@@ -73,7 +73,7 @@ namespace homework {
 /**
  * Шаблон функции для печати строк. Сторка выводится на экран без изменений.
  */
-   template <class T> typename std::enable_if<std::is_same<T,std::string>::value,void>::type print_ip(T value){
+   template <class T> typename std::enable_if<std::is_same<T,std::string>::value,void>::type print_ip(T&& value){
         std::cout << value << std::endl;
     }
 
@@ -91,7 +91,7 @@ namespace homework {
  */
  
    template <class T> typename std::enable_if<is_type_exist<typename T::allocator_type>::value &&
-                                              !(std::is_same<T,std::string>::value),void>::type print_ip(T value){
+                                              !(std::is_same<T,std::string>::value),void>::type print_ip(T& value){
 
                 for(auto it=value.begin();it!=value.end();){
                         std::cout << *it;
@@ -129,7 +129,7 @@ namespace homework {
 /**
  * Функция для песати tuple. Для определения того что тип является tuple пытаемся определить его размер.
  */
-   template <class T> typename std::enable_if<(std::tuple_size<T>::value>0),void>::type print_ip(T value){      
+   template <class T> typename std::enable_if<(std::tuple_size<T>::value>0),void>::type print_ip(T& value){      
         tuple_print<0,T>(value);
     }
    
