@@ -1,0 +1,9 @@
+Package: 04_homework
+Version: 0.0.24
+Section: devel
+Priority: optional
+Architecture: amd64
+Installed-Size: 58
+Maintainer: ddzuba@yandex.ru
+Description: 04_homework built using CMake
+
