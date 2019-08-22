@@ -65,32 +65,42 @@ namespace homework {
         size_t size = sizeof(value);
             for(int i=size-1;i>=0;i--){
                 print_char(char(value>>(8*i)));
-                if(i>0) std::cout << ".";
+                if(i>0) std::cout << '.';
             }
-            std::cout << std::endl;
+            std::cout  << std::endl;
     }
 
 /**
- * Шаблон функции для печати строк. Сторка выводится на жкран без изменений.
+ * Шаблон функции для печати строк. Сторка выводится на экран без изменений.
  */
    template <class T> typename std::enable_if<std::is_same<T,std::string>::value,void>::type print_ip(T value){
         std::cout << value << std::endl;
     }
 
 /**
- * Шаблон функции для печати коллекций. Коллекцию отличаем от других типов по второму параметру шаблона.
+ * Шаблон функции для печати коллекций. Коллекцию отличаем по наличию аллокатора.
+ * Но поскольку и у string есть аллокатор (теперь понятно откуда std::string в задании).
+ * Делаем вспомогательный шаблон, что бы в enable_if понимать есть ли тип в классе.
  */
+   template <class T> struct is_type_exist{
+       static const bool value{true};
+   };
 
-    template <class T,class ITEM_TYPE> void print_ip(T value){
-        for(auto it=value.begin();it!=value.end();){
-          std::cout << *it;
-          ++it;
-          if(it!=value.end()) std::cout<< ".";
-        }
-        std::cout << std::endl;
+/**
+ * Сам шаблон для опредения того что нам передали коллекцию. Отдельно проверяем что коллекция - не struing.
+ */
+ 
+   template <class T> typename std::enable_if<is_type_exist<typename T::allocator_type>::value &&
+                                              !(std::is_same<T,std::string>::value),void>::type print_ip(T value){
+
+                for(auto it=value.begin();it!=value.end();){
+                        std::cout << *it;
+                        ++it;
+                        if(it!=value.end()) std::cout << '.';
+                    }
+                std::cout << std::endl;
         
     }
-
  
 /**
  * Вспомогательный шаблон для печати tuple. Выводим tuple рекурсивно. Данная специализация на случай привышения индекса.
@@ -108,7 +118,7 @@ namespace homework {
        tuple_print(T & t){
        std::cout << std::get<index>(t);
        if((index+1)<std::tuple_size<T>::value){
-                std::cout << ".";
+                std::cout << '.';
                 tuple_print<index+1,T>(t);
        } else {
             std::cout << std::endl;
